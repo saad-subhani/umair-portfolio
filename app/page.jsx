@@ -99,15 +99,15 @@ export default function Home() {
           .from('.hero .lede', { y: 20, opacity: 0, duration: .7 }, '-=.6')
           .from('.hero .cta .btn', { y: 20, opacity: 0, stagger: .1, duration: .6 }, '-=.5')
           .from('.quick div', { y: 16, opacity: 0, stagger: .1, duration: .6 }, '-=.45')
-          .from('.stage', { scale: .88, y: 26, opacity: 0, duration: 1.1, ease: 'power3.out' }, '-=1.15')
+          .from('.portrait', { scale: .92, opacity: 0, duration: 1.1, ease: 'power3.out' }, '-=1.15')
           .from('.chip', { scale: .6, opacity: 0, stagger: .12, duration: .7, ease: 'back.out(1.8)' }, '-=.7')
 
         // skip continuous motion on phones — saves battery and frames
         if (!isPhone) {
-          gsap.to('.chip', { y: 'random(-12,12)', duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: .35 })
+          gsap.to('.chip', { y: 'random(-10,10)', duration: 3.2, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: .35 })
           gsap.to('.stage', {
-            yPercent: -9, ease: 'none',
-            scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .6 },
+            yPercent: -8, ease: 'none',
+            scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .5 },
           })
         }
       }
@@ -121,17 +121,20 @@ export default function Home() {
       /* ---------- skill bars + counters ---------- */
       gsap.utils.toArray('.bar i').forEach((el) => {
         if (reduce) return
-        gsap.from(el, {
-          scaleX: 0, duration: 1.2, ease: 'power3.out',
-          scrollTrigger: { trigger: el, start: 'top 92%', once: true },
-        })
+        gsap.fromTo(el, 
+          { scaleX: 0 }, 
+          {
+            scaleX: 1, duration: 1.1, ease: 'power3.out',
+            scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+          }
+        )
       })
       gsap.utils.toArray('.num').forEach((el) => {
         const target = +el.dataset.to
         if (reduce) { el.textContent = target; return }
         const o = { v: 0 }
         gsap.to(o, {
-          v: target, duration: 1.6, ease: 'power2.out',
+          v: target, duration: 1.5, ease: 'power2.out',
           scrollTrigger: { trigger: el, start: 'top 92%', once: true },
           onUpdate: () => { el.textContent = Math.round(o.v) },
         })
@@ -139,9 +142,14 @@ export default function Home() {
 
       /* ---------- scroll reveals ---------- */
       if (!reduce) {
-        ScrollTrigger.batch('.reveal', {
-          start: 'top 88%', once: true,
-          onEnter: (batch) => gsap.from(batch, { y: 56, opacity: 0, duration: .85, ease: 'power3.out', stagger: .09 }),
+        gsap.utils.toArray('.reveal').forEach((el) => {
+          gsap.fromTo(el,
+            { y: 36, opacity: 0 },
+            {
+              y: 0, opacity: 1, duration: 0.75, ease: 'power3.out', overwrite: 'auto',
+              scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+            }
+          )
         })
       }
 
