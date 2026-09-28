@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#a855f7" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background Squircle with Gradient -->
+  <rect x="32" y="32" width="448" height="448" rx="128" fill="url(#grad)" filter="url(#glow)"/>
+
+  <!-- Inner Glass Shine -->
+  <rect x="32" y="32" width="448" height="224" rx="128" fill="url(#shine)"/>
+
+  <!-- Bold 'U' Monogram -->
+  <path d="M168 140 V270 C168 322 206 364 256 364 C306 364 344 322 344 270 V140 H292 V268 C292 292 276 312 256 312 C236 312 220 292 220 268 V140 Z" fill="#05060c" />
+
+  <!-- Accent dot in neon lime -->
+  <circle cx="344" cy="140" r="16" fill="#b9f227"/>
+</svg>
